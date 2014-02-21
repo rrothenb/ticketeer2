@@ -1,39 +1,83 @@
+<% import org.codehaus.groovy.grails.orm.hibernate.support.ClosureEventTriggeringInterceptor as Events %>
 <%=packageName%>
-<!DOCTYPE html>
 <html>
-	<head>
-		<meta name="layout" content="main">
-		<g:set var="entityName" value="\${message(code: '${domainClass.propertyName}.label', default: '${className}')}" />
-		<title><g:message code="default.create.label" args="[entityName]" /></title>
-	</head>
-	<body>
-		<a href="#create-${domainClass.propertyName}" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<div class="nav" role="navigation">
-			<ul>
-				<li><a class="home" href="\${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-			</ul>
-		</div>
-		<div id="create-${domainClass.propertyName}" class="content scaffold-create" role="main">
-			<h1><g:message code="default.create.label" args="[entityName]" /></h1>
-			<g:if test="\${flash.message}">
-			<div class="message" role="status">\${flash.message}</div>
-			</g:if>
-			<g:hasErrors bean="\${${propertyName}}">
-			<ul class="errors" role="alert">
-				<g:eachError bean="\${${propertyName}}" var="error">
-				<li <g:if test="\${error in org.springframework.validation.FieldError}">data-field-id="\${error.field}"</g:if>><g:message error="\${error}"/></li>
-				</g:eachError>
-			</ul>
-			</g:hasErrors>
-			<g:form action="save" <%= multiPart ? ' enctype="multipart/form-data"' : '' %>>
-				<fieldset class="form">
-					<g:render template="form"/>
-				</fieldset>
-				<fieldset class="buttons">
-					<g:submitButton name="create" class="save" value="\${message(code: 'default.button.create.label', default: 'Create')}" />
-				</fieldset>
-			</g:form>
-		</div>
-	</body>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="layout" content="main" />
+        <title>Create ${className}</title>
+        <script>
+          baseUrl = "<g:resource/>";
+        </script>
+    </head>
+    <body>
+        <div class="body ui-widget ui-helper-reset">
+            <g:if test="\${flash.message}">
+            <div class="message ui-state-highlight">
+              <p><span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span>\${flash.message}</p>
+            </div>
+            </g:if>
+            <g:if test="\${flash.error}">
+            <div class="message ui-state-error">
+              <p><span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span>\${flash.error}</p>
+            </div>
+            </g:if>
+            <g:hasErrors bean="\${${propertyName}}">
+            <div class="message ui-state-error">
+                <g:renderErrors bean="\${${propertyName}}" as="list" />
+            </div>
+            </g:hasErrors>
+            <g:form action="save" method="post" <%= multiPart ? ' enctype="multipart/form-data"' : '' %>>
+                <div class="main dialog">
+                    <table class="ui-widget-content">
+                        <tbody>
+                        <%
+                            props = Scaffolding.determineCreateFields(domainClass)
+                            props.each { p -> %>
+                            <tr class="prop">
+                                <td valign="top" class="name">
+                                    <label for="${p.name}">${p.naturalName}:</label>
+                                </td>
+                                <td valign="middle" class="value \${hasErrors(bean:${propertyName},field:'${p.name}','errors')}">
+                                    ${renderEditor(p)}
+                                </td>
+                            </tr> 
+                        <%  } %>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="action ui-widget-header">
+                    <input class="ui-state-default" type="submit" value="Create" />
+                </div>
+            </g:form>
+        </div>
+       <div id="dateTimeDialog" title="Select Date and Time" style="display:none;">
+        <div id="datepicker"></div>
+        <form style="margin-left:auto;margin-right:auto;width:60%;">
+          <select name='dateTime_hour' id='dateTime_hour' class="ui-state-default">
+            <option value='1' >1</option>
+            <option value='2' >2</option>
+            <option value='3' >3</option>
+
+            <option value='4' >4</option>
+            <option value='5' >5</option>
+            <option value='6' >6</option>
+            <option value='7' >7</option>
+            <option value='8' >8</option>
+            <option value='9' >9</option>
+            <option value='10' >10</option>
+            <option value='11' >11</option>
+            <option value='12' >12</option>
+
+          </select> :
+          <select name='dateTime_minute' id='dateTime_minute' class="ui-state-default">
+            <option value='00' >00</option>
+            <option value='30' >30</option>
+          </select>
+          <select name='dateTime_am_pm' id='dateTime_am_pm' class="ui-state-default">
+            <option value='AM' >AM</option>
+            <option value='PM' >PM</option>
+          </select>
+        </form>
+      </div>
+   </body>
 </html>

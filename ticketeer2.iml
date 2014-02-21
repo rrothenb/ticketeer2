@@ -37,6 +37,7 @@
       <sourceFolder url="file://$MODULE_DIR$/test/unit" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/test/integration" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/grails-app/realms" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/target/classes" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
@@ -45,7 +46,6 @@
       <library name="Grails User Library (ticketeer2)">
         <CLASSES>
           <root url="file://$MODULE_DIR$/lib" />
-          <root url="jar://$USER_HOME$/.grails/ivy-cache/org.eclipse.jdt.core.compiler/ecj/jars/ecj-3.7.2.jar!/" />
           <root url="jar://$USER_HOME$/.grails/ivy-cache/org.apache.shiro/shiro-core/bundles/shiro-core-1.2.0.jar!/" />
           <root url="jar://$USER_HOME$/.grails/ivy-cache/org.apache.shiro/shiro-spring/bundles/shiro-spring-1.2.0.jar!/" />
           <root url="jar://$USER_HOME$/.grails/ivy-cache/org.opensymphony.quartz/quartz/jars/quartz-1.6.1.jar!/" />
@@ -56,6 +56,7 @@
           <root url="jar://$USER_HOME$/.grails/ivy-cache/org.apache.shiro/shiro-web/bundles/shiro-web-1.2.0.jar!/" />
           <root url="jar://$USER_HOME$/.grails/ivy-cache/org.apache.shiro/shiro-cas/bundles/shiro-cas-1.2.0.jar!/" />
           <root url="jar://$USER_HOME$/.grails/ivy-cache/org.apache.shiro/shiro-ehcache/bundles/shiro-ehcache-1.2.0.jar!/" />
+          <root url="jar://$USER_HOME$/.grails/ivy-cache/org.eclipse.jdt.core.compiler/ecj/jars/ecj-3.7.2.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
